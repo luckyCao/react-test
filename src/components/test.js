@@ -1,5 +1,8 @@
-import {createElement} from '../utils/react';
+import {createElement} from '../utils/element';
 export default function(props){
+    function testEvent(){
+        console.log(1);
+    }
     return {
         props:props,
         render:function() {
@@ -8,7 +11,7 @@ export default function(props){
                 { className: "grid-box" },
                 createElement(
                     "div",
-                    { className: "info-text ma-lr14" },
+                    { className: "info-text ma-lr14",onClick: testEvent},
                     createElement(
                         "p",
                         null,
