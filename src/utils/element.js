@@ -27,9 +27,21 @@ function initVcomponent(vcomponent, parentContext, namespaceURI) {
     var props = vcomponent.props;
 
     var component = new Component(props);
+    var updater = component.$updater;
+    var cache = component.$cache;
 
+    updater.isPending = true;
+    component.props = component.props || props;
+    component.context = component.context || componentContext;
+    if (component.componentWillMount) {
+        component.componentWillMount();
+        component.state = updater.getState();
+    }
     var vnode = renderComponent(component);
     var node = initVnode(vnode);
+    cache.vnode = vnode;
+    cache.node = node;
+    cache.isMounted = true;
     return node;
 }
 
@@ -131,4 +143,4 @@ function createVnode(vtype, type, props, key, ref) {
     return vnode;
 }
 
-export {createElement,initVnode}
+export {createElement,initVnode,renderComponent}

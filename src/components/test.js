@@ -1,29 +1,37 @@
 import {createElement} from '../utils/element';
-export default function(props){
+import {Component} from '../utils/component'
+function Test(props){
+    Component.call(this);
+    var _this = this;
     function testEvent(){
-        console.log(1);
+        console.log(this.state);
+        this.setState({detail:'detail'})
     }
-    return {
-        props:props,
-        render:function() {
-            return  createElement(
-                "section",
-                { className: "grid-box" },
+    this.state={
+        detail:'测试'
+    }
+    this.props = props;
+    this.render = function() {
+        var detail = this.state.detail;
+        return  createElement(
+            "section",
+            { className: "grid-box" },
+            createElement(
+                "div",
+                { className: "info-text ma-lr14",onClick: testEvent.bind(_this)},
                 createElement(
-                    "div",
-                    { className: "info-text ma-lr14",onClick: testEvent},
-                    createElement(
-                        "p",
-                        null,
-                        " 测试"
-                    ),
-                    createElement(
-                        "p",
-                        null,
-                        "测试"
-                    )
+                    "p",
+                    null,
+                    detail
+                ),
+                createElement(
+                    "p",
+                    null,
+                    detail
                 )
-            );
-        }
+            )
+        );
     }
 }
+Test.prototype = Component.prototype
+export default Test

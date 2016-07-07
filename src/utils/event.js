@@ -1,3 +1,5 @@
+import {updateQueue} from './component'
+
 let jsdom;
 if (!process.env.BROWSER) {
     jsdom = require('jsdom').jsdom;
@@ -23,6 +25,7 @@ var dispatchEvent = function dispatchEvent(event) {
     var type = event.type;
 
     var eventType = 'on' + type;
+    updateQueue.isPending = true;
     while (target) {
         var _target = target;
         var eventStore = _target.eventStore;
@@ -35,6 +38,8 @@ var dispatchEvent = function dispatchEvent(event) {
         listener.call(target, event);
         target = target.parentNode;
     }
+    updateQueue.isPending = false;
+    updateQueue.batchUpdate();
 };
 
 export {addEvent}
