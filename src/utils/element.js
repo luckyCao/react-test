@@ -1,4 +1,5 @@
 import {setProps} from './props'
+import {pendingComponents} from './component'
 let jsdom;
 if (!process.env.BROWSER) {
   jsdom = require('jsdom').jsdom;
@@ -42,6 +43,7 @@ function initVcomponent(vcomponent, parentContext, namespaceURI) {
     cache.vnode = vnode;
     cache.node = node;
     cache.isMounted = true;
+    pendingComponents.push(component);
     return node;
 }
 

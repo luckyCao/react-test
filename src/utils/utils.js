@@ -24,4 +24,18 @@ function extend(to, from) {
     return to;
 }
 
-export {eachItem,isArr,isFn,extend}
+function flatEach(list, iteratee, a) {
+    let len = list.length
+    let i = -1
+
+    while (len--) {
+        let item = list[++i]
+        if (isArr(item)) {
+            flatEach(item, iteratee, a)
+        } else {
+            iteratee(item, a)
+        }
+    }
+}
+
+export {eachItem,isArr,isFn,extend,flatEach}

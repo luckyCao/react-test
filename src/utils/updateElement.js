@@ -1,5 +1,46 @@
 import {patchProps} from './props'
-import {VELEMENT} from './constants'
+import {VELEMENT,HTML_KEY} from './constants'
+import {flatEach} from './utils'
+
+function applyUpdate(data) {
+    if (!data) {
+        return
+    }
+    let vnode = data.vnode
+    let newNode = data.node
+
+    // update
+    if (!data.shouldIgnore) {
+        if (!vnode.vtype) {
+            newNode.replaceData(0, newNode.length, data.newVnode)
+            // newNode.nodeValue = data.newVnode
+        } else if (vnode.vtype === VELEMENT) {
+            updateVelem(vnode, data.newVnode, newNode, data.parentContext)
+        } else if (vnode.vtype === VSTATELESS) {
+            newNode = updateVstateless(vnode, data.newVnode, newNode, data.parentContext)
+        } else if (vnode.vtype === VCOMPONENT) {
+            newNode = updateVcomponent(vnode, data.newVnode, newNode, data.parentContext)
+        }
+    }
+
+    // re-order
+    let currentNode = newNode.parentNode.childNodes[data.index]
+    if (currentNode !== newNode) {
+        newNode.parentNode.insertBefore(newNode, currentNode)
+    }
+    return newNode
+}
+
+
+function applyDestroy(data) {
+    destroyVnode(data.vnode, data.node)
+    data.node.parentNode.removeChild(data.node)
+}
+
+function applyCreate(data) {
+    let node = initVnode(data.vnode, data.parentContext, data.parentNode.namespaceURI)
+    data.parentNode.insertBefore(node, data.parentNode.childNodes[data.index])
+}
 function updateVnode(vnode, newVnode, node, parentContext) {
     var vtype = vnode.vtype;
 

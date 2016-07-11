@@ -122,9 +122,9 @@ function compareTwoVnodes(vnode, newVnode, node, parentContext) {
     return newNode;
 }
 
-var pendingComponents = [];
+export let pendingComponents = [];
 
-var clearPendingComponents = function clearPendingComponents() {
+export let clearPendingComponents = function clearPendingComponents() {
     var components = pendingComponents;
     var len = components.length;
     if (!len) {
