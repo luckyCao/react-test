@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jsdom": "^9.4.1"
+    "jsdom": "^9.4.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-lite":"^0.15.16"
   },
   "devDependencies": {
     "babel": "^5.8.25",
