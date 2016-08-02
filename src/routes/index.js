@@ -4,7 +4,8 @@ import Root from '../container/root';
 import Layout from '../components/layout';
 import Test from '../components/test';
 delete process.env.BROWSER;
-import {createElement,initVnode} from '../utils/element';
+import {createElement} from 'react-lite'
+import {initVnode} from '../utils/element';
 let router = express.Router();
 
 router.get('/service', function (req, res, next) {

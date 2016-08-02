@@ -15,7 +15,7 @@ function initVnode(vnode, parentContext, namespaceURI) {
     } else if (vtype === 2) {
         // init element
         node = initVelem(vnode, parentContext, namespaceURI);
-    }else if (vtype === 4) {
+    }else if (vtype === 4 ||vtype===3) {
         // init state component
         node = initVcomponent(vnode, parentContext, namespaceURI);
     }
@@ -62,73 +62,4 @@ function initVchildren(velem, node, parentContext) {
     }
 }
 
-function createElement(type, props, children) {
-    var vtype = null;
-    if (typeof type === 'string') {
-        vtype = 2;
-    }
-    else if (typeof type === 'function') {
-        vtype = 4;
-    }
-    var key = null;
-    var ref = null;
-    var finalProps = {};
-    if (props != null) {
-        for (var propKey in props) {
-            if (!props.hasOwnProperty(propKey)) {
-                continue;
-            }
-            if (propKey === 'key') {
-                if (props.key !== undefined) {
-                    key = '' + props.key;
-                }
-            } else if (propKey === 'ref') {
-                if (props.ref !== undefined) {
-                    ref = props.ref;
-                }
-            } else {
-                finalProps[propKey] = props[propKey];
-            }
-        }
-    }
-
-    var defaultProps = type.defaultProps;
-
-    if (defaultProps) {
-        for (var propKey in defaultProps) {
-            if (finalProps[propKey] === undefined) {
-                finalProps[propKey] = defaultProps[propKey];
-            }
-        }
-    }
-
-    var argsLen = arguments.length;
-    var finalChildren = children;
-
-    if (argsLen > 3) {
-        finalChildren = Array(argsLen - 2);
-        for (var i = 2; i < argsLen; i++) {
-            finalChildren[i - 2] = arguments[i];
-        }
-    }
-
-    if (finalChildren !== undefined) {
-        finalProps.children = finalChildren;
-    }
-
-    return createVnode(vtype, type, finalProps, key, ref);
-}
-
-function createVnode(vtype, type, props, key, ref) {
-    var vnode = {
-        vtype: vtype,
-        type: type,
-        props: props,
-        key: key,
-        ref: ref
-    };
-
-    return vnode;
-}
-
-export {createElement,initVnode}
+export {initVnode}

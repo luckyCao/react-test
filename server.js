@@ -6,7 +6,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
 import ip from 'ip';
 import colors from 'colors';
-import routes from './src/routes/index.js'
+//import routes from './src/routes/index.js'
 const port = '3008'
 
 const app = express();
@@ -24,7 +24,7 @@ const middleware = webpackMiddleware(compiler, {
 });
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
-app.use('/', routes);
+//app.use('/', routes);
 app.get('*', function response(req, res) {
     //if no favicon
     if (req.url === '/favicon.ico') {

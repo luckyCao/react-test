@@ -5,7 +5,6 @@ var webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ROOT_PATH = path.resolve(__dirname),
     APP_PATH = path.resolve(ROOT_PATH, 'src');
-
 module.exports = {
     entry: [
         'webpack-hot-middleware/client',
@@ -46,7 +45,8 @@ module.exports = {
             moveToParents: true
         }),
         new webpack.DefinePlugin({
-            'process.env.BROWSER': JSON.stringify(true)
+            'process.env.BROWSER': JSON.stringify(true),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
     ],
     devtool: 'source-map'
