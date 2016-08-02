@@ -3,7 +3,6 @@ import {jsdom,serializeDocument } from 'jsdom';
 import Root from '../container/root';
 import Layout from '../components/layout';
 import Test from '../components/test';
-import Root from '../container/root';
 delete process.env.BROWSER;
 import {createElement,initVnode} from '../utils/react';
 let router = express.Router();
