@@ -1,4 +1,4 @@
-import {createElement} from '../utils/react';
+import {createElement} from '../utils/element';
 import Layout from '../components/layout';
 import Test from '../components/test'
 export default function(props){

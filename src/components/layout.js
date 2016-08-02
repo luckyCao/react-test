@@ -1,4 +1,4 @@
-import {createElement} from '../utils/react';
+import {createElement} from '../utils/element';
 
 export default function(props){
     return {

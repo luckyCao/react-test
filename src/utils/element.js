@@ -1,7 +1,9 @@
+import {setProps} from './props'
 let jsdom;
 if (!process.env.BROWSER) {
   jsdom = require('jsdom').jsdom;
 }
+let doc = (jsdom?jsdom("<html></html>"):document);
 
 function initVnode(vnode, parentContext, namespaceURI) {
     var vtype = vnode.vtype;
@@ -9,7 +11,6 @@ function initVnode(vnode, parentContext, namespaceURI) {
     var node = null;
     if (!vtype) {
         // init text
-        let doc = (jsdom?jsdom("<html></html>"):document);
         node = doc.createTextNode(vnode);
     } else if (vtype === 2) {
         // init element
@@ -42,10 +43,10 @@ function initVelem(velem, parentContext, namespaceURI) {
     var props = velem.props;
 
     var node = null;
-    let doc = (jsdom?jsdom("<html></html>"):document);
     node = doc.createElement(type);
 
     initVchildren(velem, node, parentContext);
+    setProps(node, props);
     return node;
 }
 
