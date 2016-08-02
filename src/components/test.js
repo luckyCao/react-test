@@ -6,7 +6,7 @@ let Test = null;
 
 function test1(props){
     function testEvent(){
-        console.log('test');
+        console.log('custom');
     }
     return {
         props:props,
