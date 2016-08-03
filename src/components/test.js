@@ -5,7 +5,7 @@ function Test(props){
     var _this = this;
     function testEvent(){
         console.log(this.state);
-        this.setState({detail:'detail'})
+        //this.setState({detail:'detail'})
     }
     this.state={
         detail:'测试'

@@ -2,7 +2,7 @@ import {createElement} from '../utils/element';
 import {Component} from '../utils/component'
 import Layout from '../components/layout';
 import Test from '../components/test'
-export default function(props){
+function Root(props){
     Component.call(this);
     this.props = props;
     this.render = function() {
@@ -16,3 +16,5 @@ export default function(props){
         console.log('componentWillMount');
     }
 }
+Root.prototype = Component.prototype
+export default Root
