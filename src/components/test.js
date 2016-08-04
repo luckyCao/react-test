@@ -20,12 +20,12 @@ function test1(props){
                     createElement(
                         "p",
                         null,
-                        " 测试"
+                        " custom"
                     ),
                     createElement(
                         "p",
                         null,
-                        "测试"
+                        "custom"
                     )
                 )
             );
@@ -55,3 +55,5 @@ else{
 }
 
 export default Test
+
+

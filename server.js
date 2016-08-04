@@ -6,7 +6,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
 import ip from 'ip';
 import colors from 'colors';
-//import routes from './src/routes/index.js'
 const port = '3008'
 
 const app = express();
