@@ -46,7 +46,8 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env.BROWSER': JSON.stringify(true),
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.CHAPTER': JSON.stringify(process.env.CHAPTER)
         })
     ],
     devtool: 'source-map'

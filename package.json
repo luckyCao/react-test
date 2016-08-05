@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node  server.js",
-    "custom": "NODE_ENV=custom babel-node server.js"
+    "chapter1": "NODE_ENV=custom CHAPTER=1 babel-node server.js",
+    "chapter2": "NODE_ENV=custom CHAPTER=2 babel-node server.js"
   },
   "author": "",
   "license": "ISC",
