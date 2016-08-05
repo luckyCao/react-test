@@ -4,7 +4,7 @@ import Test from '../components/test'
 import React from 'react'
 
 const isCustom = process.env.NODE_ENV == 'custom';
-let Root = null;
+let RootC1 = null;
 function root1(props){
     return {
         props:props,
@@ -29,13 +29,13 @@ class root2 extends React.Component {
 }
 
 if(isCustom){
-  Root = root1;
+    RootC1 = root1;
 }
 else{
-  Root = root2;
+    RootC1 = root2;
 }
 
-export default Root
+export default RootC1
 
 
 
