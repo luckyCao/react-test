@@ -9,5 +9,7 @@ npm run chapter1
 #
 npm run chapter2
 #
-阅读了源码后 整理了一份简单的实现 帮助理解
-
+阅读了react-redux源码后 整理了一份简单的实现 帮助理解
+#
+[自定义的react-redux](http://luckycao.info/%E6%B7%B1%E5%85%A5react%E6%8A%80%E6%9C%AF%E6%A0%88/2016/08/05/Implement-React-Redux.html)
+#
