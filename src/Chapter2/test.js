@@ -17,7 +17,7 @@ class Test extends React.Component {
 }
 
 const mapStateToProps = (state)=>{
-    return {count:state}
+    return {count:state.count}
 }
 
 export default connect(mapStateToProps,actionCreaters)(Test)

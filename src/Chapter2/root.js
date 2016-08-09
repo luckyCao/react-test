@@ -1,5 +1,6 @@
 import {createElement} from 'react-lite'
 import Test from './test'
+import Deep from './deep'
 import React from 'react'
 import counter from './reducer'
 import { createStore } from 'redux'
@@ -11,7 +12,16 @@ class RootC2 extends React.Component {
     render(){
         return(
             <Provider store={store}>
-                <Test />
+                <div>
+                    <div>
+                        <Test />
+                        <div>
+                          <div>
+                            <Deep></Deep>
+                          </div>
+                        </div>
+                    </div>
+                </div>
             </Provider>
         )
     }
