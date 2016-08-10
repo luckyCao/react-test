@@ -34,7 +34,7 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
                 this.stateProps = mappedState;
                 return mappedState
             }
-            configureFinalMapDispatch(store, props) {
+            configureFinalMapDispatch(store) {
                 const mappedDispatch = mapDispatch(store.dispatch)
                 this.dispatchProps = mappedDispatch;
                 return mappedDispatch
