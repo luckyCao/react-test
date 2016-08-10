@@ -1,9 +1,18 @@
-export default function counter(state = 0, action) {
+const initState={
+  count:1,
+  deep:{
+    deep1:'deep1',
+    deep2:2
+  }
+}
+
+
+export default function counter(state = initState, action) {
     switch (action.type) {
         case 'ADD':
-            return state + 1
+            return Object.assign({},state,{count:state.count+1})
         case 'REDUCE':
-            return state - 1
+            return Object.assign({},state,{count:state.count-1})
         default:
             return state
     }
