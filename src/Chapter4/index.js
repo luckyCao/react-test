@@ -14,7 +14,6 @@ const lazyLoading = bundle=>(nextState, cb)=>{
         cb(null,component)
     })
 }
-
 export default (
     <Router history={history}>
         <Route getComponent={lazyLoading(Home)} path="/"/>

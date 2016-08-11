@@ -15,23 +15,18 @@ function createHashHistory() {
     function startHashChangeListener(_ref) {
         var transitionTo = _ref.transitionTo;
         function hashChangeListener() {
-            console.log('hashChange');
-            transitionTo('newHash');
+            transitionTo(getCurrentLocation());
         }
-        document.addEventListener('hashchange',hashChangeListener, false);
-
+        window.addEventListener('hashchange',hashChangeListener, false);
         return function () {
-            document.removeEventListener('hashchange', hashChangeListener,false);
+            window.removeEventListener('hashchange', hashChangeListener,false);
         };
     }
     function listen(listener) {
         if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
-
         var unlisten = history.listen(listener);
-
         return function () {
             unlisten();
-
             if (--listenerCount === 0) stopHashChangeListener();
         };
     }

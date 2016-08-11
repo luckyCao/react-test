@@ -9,29 +9,19 @@ function createHistory() {
             listener(location);
         });
     }
-
-
     function transitionTo(nextLocation) {
         updateLocation(nextLocation)
     }
-
     function listen(listener) {
         changeListeners.push(listener);
-
-        if (location) {
-            listener(location);
-        }
-        else{
-            var _location = getCurrentLocation();
-            updateLocation(_location);
-        }
+         var _location = getCurrentLocation();
+         updateLocation(_location);
         return function () {
             changeListeners = changeListeners.filter(function (item) {
                 return item !== listener;
             });
         };
     }
-
     return {
         listen: listen,
         transitionTo:transitionTo

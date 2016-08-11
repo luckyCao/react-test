@@ -4,7 +4,6 @@ class route extends React.Component {
         return undefined;
     }
 }
-
 export default route
 
 
