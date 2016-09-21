@@ -7,6 +7,7 @@ import tokenize from 'Chapter3/tokenize';
 import React from 'react'
 import { render } from 'react-dom'
 import routes from 'Chapter4'
+import Promise from 'Chapter5'
 
 const isCustom = process.env.NODE_ENV == 'custom';
 const CHAPTER = process.env.CHAPTER;
@@ -45,5 +46,28 @@ switch (CHAPTER){
       document.getElementById('root')
     )
     break;
+  case '5':
+    let promise = new Promise((resolve,reject)=>{
+      //(1)这里创建了一个promise对象记为(p1)
+      setTimeout((value)=>{
+        //(4)一秒钟后p1的resolve(10)被执行
+        resolve(10)
+      },1000)
+    })
+    //(2)这里p1的then函数创建了一个promise对象p2
+    promise.then((value)=>{
+      //(5)因为p1的resolve被执行所以p1相应的onFulfilled函数被执行打印了log 10
+      console.log(value);
+      //(6)接下来新建了一个promise对象(记为p4)，重点是这个对象返回了
+      return new Promise((resolve,reject)=>{
+        setTimeout((value)=>{
+          resolve(20)//(9)再一秒之后p4的resolve被执行
+        },1000)
+      });
+    },()=>{}).then(value=>{ //(3)这是p2的then函数,它创建创建了一个promise对象p3
+      console.log(value)//(12)打印log 20
+    })
+    break;
+
 }
 
