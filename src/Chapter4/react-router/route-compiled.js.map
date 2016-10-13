@@ -1,0 +1,1 @@
+{"version":3,"sources":["route.js"],"names":[],"mappings":"AAAA,OAAO,KAAP,MAAkB,OAAlB;AACA,MAAM,KAAN,SAAoB,MAAM,SAA1B,CAAoC;AAChC,aAAU;AACN,eAAO,SAAP;AACH;AAH+B;AAKpC,eAAe,KAAf","file":"route-compiled.js","sourcesContent":["import React from 'react'\nclass route extends React.Component {\n    render () {\n        return undefined;\n    }\n}\nexport default route\n\n\n"]}
