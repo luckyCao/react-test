@@ -4,7 +4,8 @@ var webpack = require('webpack'),
     ip = require('ip'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ROOT_PATH = path.resolve(__dirname),
-    APP_PATH = path.resolve(ROOT_PATH, 'src');
+    APP_PATH = path.resolve(ROOT_PATH, 'src'),
+    TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 module.exports = {
     entry: ['webpack-hot-middleware/client', APP_PATH],
@@ -29,7 +30,7 @@ module.exports = {
         filename: "index.html",
         inject: 'body',
         template: "src/index.tpl.html"
-    }), new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), new webpack.optimize.OccurenceOrderPlugin(), new webpack.optimize.DedupePlugin(), new webpack.optimize.AggressiveMergingPlugin({
+    }), new TransferWebpackPlugin([{ from: 'lib', to: 'build' }], path.join(__dirname, 'src')), new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), new webpack.optimize.OccurenceOrderPlugin(), new webpack.optimize.DedupePlugin(), new webpack.optimize.AggressiveMergingPlugin({
         minSizeReduce: 1.5,
         moveToParents: true
     }), new webpack.DefinePlugin({

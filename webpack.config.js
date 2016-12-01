@@ -4,7 +4,9 @@ var webpack = require('webpack'),
     ip = require('ip'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ROOT_PATH = path.resolve(__dirname),
-    APP_PATH = path.resolve(ROOT_PATH, 'src');
+    APP_PATH = path.resolve(ROOT_PATH, 'src'),
+    TransferWebpackPlugin = require('transfer-webpack-plugin');
+
 
 module.exports = {
     entry: [
@@ -37,6 +39,9 @@ module.exports = {
             inject: 'body',
             template: "src/index.tpl.html"
         }),
+        new TransferWebpackPlugin([
+            { from: 'lib', to: 'build'}
+        ], path.join(__dirname, 'src')),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
