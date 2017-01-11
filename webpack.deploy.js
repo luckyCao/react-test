@@ -84,7 +84,7 @@ var config = {
       source: false,
       modules: true
     }),
-    new ExtractTextPlugin('css/app.css'),
+    new ExtractTextPlugin('css/[name].[hash:4].css'),
     new webpack.optimize.CommonsChunkPlugin('shared', 'js/shared.js'),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
