@@ -1,9 +1,4 @@
-import React from 'react'
-import { render } from 'react-dom'
-import routes from 'Chapter4'
+var pageA = require('playground/pageA')
 
-render(
-  routes,
-  document.getElementById('root')
-)
+pageA()
 

@@ -9,10 +9,14 @@ var webpack = require('webpack'),
 
 
 module.exports = {
-    entry: [
-        'webpack-hot-middleware/client',
-        APP_PATH
-    ],
+    entry:{
+      client: 'webpack-hot-middleware/client',
+      pageA: path.resolve(__dirname, 'src/pageA.js'),
+      pageB: path.resolve(__dirname, 'src/pageB.js'),
+      shared: [
+        'babel-polyfill'
+      ]
+    },
     output: {
         path: path.join(__dirname, '/build/'),
         filename: 'build/[name].[hash:4].js',
@@ -34,11 +38,18 @@ module.exports = {
         extensions: ['', '.js', '.png']
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: "index.html",
-            inject: 'body',
-            template: "src/index.tpl.html"
-        }),
+      new HtmlWebpackPlugin({
+        template: 'src/pageA.tpl.html',
+        chunks: ['shared','pageA'],
+        inject: 'body',
+        filename: 'pageA.html'
+      }),
+      new HtmlWebpackPlugin({
+        template: 'src/pageB.tpl.html',
+        chunks: ['shared','pageB'],
+        inject: 'body',
+        filename: 'pageB.html'
+      }),
         new TransferWebpackPlugin([
             { from: 'lib', to: 'build'}
         ], path.join(__dirname, 'src')),
