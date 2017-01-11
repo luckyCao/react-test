@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
-    "deploy": "rm -rf dist && NODE_ENV=production webpack --config ./webpack.deploy.js --progress --profile --colors"
+    "start": "TERMINAL=pageA,pageB babel-node server.js",
+    "deploy": "rm -rf dist && NODE_ENV=production TERMINAL=pageA,pageB webpack --config ./webpack.deploy.js --progress --profile --colors"
   },
   "author": "",
   "license": "ISC",

@@ -8,11 +8,9 @@ var webpack = require('webpack'),
     TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 
-module.exports = {
+var config =  {
     entry:{
       client: 'webpack-hot-middleware/client',
-      pageA: path.resolve(__dirname, 'src/pageA.js'),
-      pageB: path.resolve(__dirname, 'src/pageB.js'),
       shared: [
         'babel-polyfill'
       ]
@@ -24,7 +22,10 @@ module.exports = {
         publicPath: '/'
     },
     module: {
-        loaders: [ {
+        loaders: [{
+          test: /\.less$/,
+          loader: 'style!css!postcss!less'
+        }, {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             loaders: ['babel?optional=runtime&stage=0']
@@ -37,19 +38,13 @@ module.exports = {
         ],
         extensions: ['', '.js', '.png']
     },
+    postcss: function() {
+      return [
+        require('precss'),
+        require('autoprefixer')
+      ]
+    },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: 'src/pageA.tpl.html',
-        chunks: ['shared','pageA'],
-        inject: 'body',
-        filename: 'pageA.html'
-      }),
-      new HtmlWebpackPlugin({
-        template: 'src/pageB.tpl.html',
-        chunks: ['shared','pageB'],
-        inject: 'body',
-        filename: 'pageB.html'
-      }),
         new TransferWebpackPlugin([
             { from: 'lib', to: 'build'}
         ], path.join(__dirname, 'src')),
@@ -67,3 +62,14 @@ module.exports = {
     ],
     devtool: 'source-map'
 };
+
+process.env.TERMINAL.split(',').forEach(function(name) {
+  config.entry[name] = path.resolve(__dirname, `src/${name}.js`)
+  config.plugins.push(new HtmlWebpackPlugin({
+    template: `src/${name}.tpl.html`,
+    chunks: ['shared',name],
+    inject: 'body',
+    filename: `${name}.html`
+  }))
+})
+module.exports = config;

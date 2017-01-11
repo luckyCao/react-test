@@ -12,8 +12,6 @@ var assetsPath = '/assets/';    // 新系统path
 var config = {
   cache: true,
   entry: {
-    pageA: path.resolve(__dirname, 'src/pageA.js'),
-    pageB: path.resolve(__dirname, 'src/pageB.js'),
     shared: [
       'babel-polyfill'
     ]
@@ -82,18 +80,6 @@ var config = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/pageA.tpl.html',
-      chunks: ['shared','pageA'],
-      inject: 'body',
-      filename: 'pageA.html'
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/pageB.tpl.html',
-      chunks: ['shared','pageB'],
-      inject: 'body',
-      filename: 'pageB.html'
-    }),
     new StatsPlugin('webpack.stats.json', {
       source: false,
       modules: true
@@ -123,17 +109,13 @@ var config = {
     })
   ]
 };
-if(isProduction){
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    sourceMap: false,
-    cache: false,
-    compressor: {
-      warnings: false,
-      screw_ie8: false
-    },
-    output: {
-      comments: false
-    }
+process.env.TERMINAL.split(',').forEach(function(name) {
+  config.entry[name] = path.resolve(__dirname, `src/${name}.js`)
+  config.plugins.push(new HtmlWebpackPlugin({
+    template: `src/${name}.tpl.html`,
+    chunks: ['shared',name],
+    inject: 'body',
+    filename: `${name}.html`
   }))
-}
+})
 module.exports = config;
